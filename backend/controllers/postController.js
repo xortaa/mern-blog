@@ -1,6 +1,14 @@
 const Post = require("../models/postModel")
 const asyncHandler = require("express-async-handler")
 
+const getPosts = asyncHandler(async (req, res) => { 
+  const Posts = await Post.find()
+
+  if (Posts) { 
+    res.status(200).json(Posts)
+  }
+})
+
 const createPost = asyncHandler(async (req, res) => {
   const { title, author, body } = req.body
 
@@ -23,4 +31,4 @@ const createPost = asyncHandler(async (req, res) => {
   }
 })
 
-module.exports = { createPost }
+module.exports = { getPosts, createPost }
