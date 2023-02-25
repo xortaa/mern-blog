@@ -31,4 +31,14 @@ const createPost = asyncHandler(async (req, res) => {
   }
 })
 
-module.exports = { getPosts, createPost }
+const deletePost = asyncHandler(async (req, res) => { 
+  const post = await Post.findById(req.params.id)
+  if (!post) { 
+    res.status(400)
+    throw new Error('post not found')
+  }
+  await post.remove()
+  res.status(200).json({ msg: `deleted ${req.params.id}` })
+})
+
+module.exports = { getPosts, createPost, deletePost }
