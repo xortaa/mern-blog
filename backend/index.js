@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 require('dotenv').config()
 const PORT = process.env.PORT
 const postRoutes = require('./routes/postRoutes')
+const adminRoutes = require('./routes/adminRoutes')
 
 
 const app = express()
@@ -14,6 +15,7 @@ app.get('/', (req, res) => {
 })
 
 app.use('/api/posts', postRoutes)
+app.use('/api/admin', adminRoutes)
 
 mongoose.set('strictQuery', true);
 mongoose.connect(process.env.MONGO_URI).then(
